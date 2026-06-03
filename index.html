@@ -6,13 +6,13 @@
   
   <!-- SEO Optimization Best Practices -->
   <title>Multidimensional Gender Identity Inventory (MGII)</title>
-  <meta name="description" content="A multidimensional psychometric inventory that evaluates your internal resonance across 8 independent psychological dimensions, mapping your coordinates against 72 distinct taxonomical profiles.">
-  <meta name="keywords" content="gender spectrum, gender compass, gender identity, gender psychology, psychometric gender test, non-binary, genderfluid, agender, gender care standards">
+  <meta name="description" content="An assessment for people who are confused as to where they stand on the gender spectrum. By evaluating your internal resonance across 8 independent psychological dimensions, the engine maps your unique experience against a spectrum of 72 taxonomical profiles, helping you find where you stand through clear alignment metrics.">
+  <meta name="keywords" content="gender spectrum, gender identity, gender psychology, psychometric gender test, non-binary, genderfluid, agender, MGII">
   <meta name="author" content="Antigravity Coding System">
   
   <!-- Open Graph Social Metadata -->
   <meta property="og:title" content="Multidimensional Gender Identity Inventory (MGII)">
-  <meta property="og:description" content="An assessment for people who are confused as to where they stand on the gender spectrum. Map your coordinates against 72 distinct taxonomical profiles.">
+  <meta property="og:description" content="An assessment for people who are confused as to where they stand on the gender spectrum. By evaluating your internal resonance across 8 independent psychological dimensions, the engine maps your unique experience against a spectrum of 72 taxonomical profiles, helping you find where you stand through clear alignment metrics.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   
@@ -92,15 +92,18 @@
     <!-- Sidebar Detail Panel Drawer -->
     <aside id="chart-detail-panel">
       <div id="panel-empty-state" class="panel-empty">
-        <h4 class="font-bold text-gray-400">Clinical Taxonomy Explorer</h4>
+        <h4 class="font-bold text-gray-400">Taxonomy Explorer</h4>
         <p class="panel-info-text">
-          Select any category to expand it, or click a specific gender capsule to inspect its full profile description, clinical coordinates, and 8-dimensional vector footprint.
+          Select any category to expand it, or click a specific gender capsule to inspect its full profile description, dimensional coordinates, and 8-dimensional vector footprint.
         </p>
       </div>
       <div id="panel-active-state" class="panel-active hidden">
         <div class="panel-header-row">
           <span id="panel-category-pill"></span>
-          <span id="panel-node-type"></span>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span id="panel-node-type"></span>
+            <button id="close-panel-btn" onclick="closeDetailPanel()" class="minimal-badge" style="cursor: pointer; background: transparent; border: 1px solid var(--border-card); margin-left: 0.5rem;">✕</button>
+          </div>
         </div>
         
         <div class="panel-title-container">
@@ -109,7 +112,7 @@
         </div>
 
         <div class="panel-desc-container">
-          <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-white/5 pb-1">Clinical Description</h4>
+          <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-white/5 pb-1">Profile Description</h4>
           <p id="panel-node-desc" class="text-sm text-gray-300 leading-relaxed font-light"></p>
         </div>
 
@@ -126,7 +129,7 @@
 
   <!-- Methodology and Sources View Container -->
   <div id="math-sources-container" class="hidden">
-    <main class="quiz-shell" style="max-width: 820px; margin: 0 auto 2rem auto;">
+    <main class="quiz-shell" style="width: 100%; max-width: 820px; margin: 0 auto 2rem auto;">
       <div class="glass-card">
         <h2 class="hero-title" style="border-bottom: 1px solid var(--border-card); padding-bottom: 0.5rem; margin-bottom: 2.5rem;">Inventory Methodology</h2>
         
@@ -162,25 +165,67 @@
             $$\text{Distance}(U, G_j) = \sqrt{\sum_{k} S_k \times \left(U_{\text{norm}}(k) - \text{Centroid}_{j, k}\right)^2}$$
           </div>
           <p>
-            The final match percentage is computed using a dynamically adjusted scaling factor $S_{\text{scale}}$ to normalize distances across variable salience bounds:
+            The final match percentage is computed using a Gaussian Radial Basis Function (RBF) kernel to provide highly selective, non-linear classification curves:
           </p>
           <div class="math-block">
-            $$\text{Match \%} = \max\left(0, 100 \times \left(1 - \frac{\text{Distance}(U, G_j)}{S_{\text{scale}}}\right)\right)$$
+            $$\text{Match \%} = \text{round}\left(100 \times e^{-\left(\frac{\text{Distance}(U, G_j)}{\sigma_j}\right)^2}\right)$$
           </div>
           <p>
-            Where the scaling threshold $S_{\text{scale}}$ dynamically calibrates based on active salience weights:
+            Where the dynamic width parameter $\sigma_j$ is calibrated based on active salience weights to adapt the distribution shape to the defining coordinates:
           </p>
           <div class="math-block">
-            $$S_{\text{scale}} = 120 \times \sqrt{\frac{\sum_{k} S_k}{8}}$$
+            $$\sigma_j = 100 \times \sqrt{\frac{\sum_{k} S_k}{8}}$$
           </div>
         </section>
 
-        <h2 class="hero-title" style="border-bottom: 1px solid var(--border-card); padding-bottom: 0.5rem; margin-bottom: 2rem; margin-top: 3rem;">Clinical Sources & Foundations</h2>
+        <section class="specs-section">
+          <h3>4. Extremity-Based Salience Weighting</h3>
+          <p>
+            In human personality and identity dynamics, traits scoring near the extremes (highly present or completely absent) hold significant defining power, whereas neutral scores represent low salience. The engine dynamically scales the salience weight $S_k$ of each axis using a continuous extremity evaluation:
+          </p>
+          <div class="math-block">
+            $$S_k = 1.0 + \alpha_k \times \left( \frac{|U_{\text{norm}}(k) - 50|}{50} \right)$$
+          </div>
+          <p>
+            Where the extremity multiplier $\alpha_k$ is calibrated per axis to reflect its defining weight:
+          </p>
+          <ul class="font-light text-sm text-gray-300" style="list-style-type: square; padding-left: 1.5rem; line-height: 1.6; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+            <li><strong>Assigned-Sex Congruence ($\alpha_{\text{congruence}} = 1.5$):</strong> High salience defines the cis/trans boundary.</li>
+            <li><strong>Xenic Metaphor ($\alpha_{\text{xenic}} = 1.2$):</strong> Drives alignment with metaphorical and botanical/cosmic profiles.</li>
+            <li><strong>Temporal Fluidity ($\alpha_{\text{fluidity}} = 1.2$):</strong> Controls the boundary between static and fluid gender categories.</li>
+            <li><strong>Agender & Nullity ($\alpha_{\text{nullity}} = 1.0$):</strong> Focuses matching when agender properties are highly defined.</li>
+            <li><strong>Other Scales ($\alpha_{\text{other}} = 0.8$):</strong> Baseline extremity defining weight.</li>
+          </ul>
+        </section>
+
+        <section class="specs-section">
+          <h3>5. Psychometric Alignment Indicators</h3>
+          <p>
+            To provide high-level conceptual feedback, the engine computes five specific alignment indicators:
+          </p>
+          <div class="math-block">
+            $$\text{Gender Congruence Index (GCI)} = U_{\text{norm}}(\text{congruence})$$
+          </div>
+          <div class="math-block">
+            $$\text{Temporal Dynamism Index (TDI)} = \text{round}\left( \frac{U_{\text{norm}}(\text{fluidity}) + U_{\text{norm}}(\text{flux})}{2} \right)$$
+          </div>
+          <div class="math-block">
+            $$\text{Xenic Metaphor Index (XMI)} = U_{\text{norm}}(\text{xenic})$$
+          </div>
+          <div class="math-block">
+            $$\text{Social Defiance Index (SDI)} = U_{\text{norm}}(\text{defiance})$$
+          </div>
+          <div class="math-block">
+            $$\text{Dual-Energy Balance (mRatio)} = \text{round}\left( 100 \times \frac{U_{\text{norm}}(\text{masculinity})}{U_{\text{norm}}(\text{masculinity}) + U_{\text{norm}}(\text{femininity})} \right)$$
+          </div>
+        </section>
+
+        <h2 class="hero-title" style="border-bottom: 1px solid var(--border-card); padding-bottom: 0.5rem; margin-bottom: 2rem; margin-top: 3rem;">Sources & Foundations</h2>
 
         <div class="source-item">
           <h4 class="source-title">Foundational Multidimensional Models <span class="source-meta">(BSRI / GIS)</span></h4>
           <p class="source-description">
-            Separation of masculine and feminine internalization into separate orthogonal scales is based on the <strong>Bem Sex-Role Inventory (BSRI)</strong> (Bem, S. L., 1974, <em>Journal of Consulting and Clinical Psychology</em>) and the <strong>Gender Identity Scale (GIS)</strong> (Kagan, J., 1964). These clinical models proved that masculine and feminine attributes exist independently rather than as opposite endpoints of a single bipolar spectrum.
+            Separation of masculine and feminine internalization into separate orthogonal scales is based on the <strong>Bem Sex-Role Inventory (BSRI)</strong> (Bem, S. L., 1974, <em>Journal of Consulting and Clinical Psychology</em>) and the <strong>Gender Identity Scale (GIS)</strong> (Kagan, J., 1964). These foundational models proved that masculine and feminine attributes exist independently rather than as opposite endpoints of a single bipolar spectrum.
           </p>
         </div>
 
@@ -201,7 +246,7 @@
         <div class="source-item">
           <h4 class="source-title">Temporal Dynamism & Fluidity Profiles <span class="source-meta">(Diamond / Twist)</span></h4>
           <p class="source-description">
-            Theoretical work on temporal gender fluidity and intensity flux models follows Diamond, L. M. (2008, <em>Female Sexual Fluidity</em>, Harvard University Press) and Twist, J., & de Graaf, N. M. (2019, <em>Clinical Child Psychology and Psychiatry</em>, "Gender Diversity and Gender Dysphoria in Children and Adolescents"). These clinical papers outline criteria for temporal shifting, volatility scales, and partial gender configurations.
+            Theoretical work on temporal gender fluidity and intensity flux models follows Diamond, L. M. (2008, <em>Female Sexual Fluidity</em>, Harvard University Press) and Twist, J., & de Graaf, N. M. (2019, <em>Clinical Child Psychology and Psychiatry</em>, "Gender Diversity and Gender Dysphoria in Children and Adolescents"). These papers outline criteria for temporal shifting, volatility scales, and partial gender configurations.
           </p>
         </div>
 
@@ -215,8 +260,18 @@
     </main>
   </div>
 
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span>Multidimensional Gender Identity Inventory (MGII)</span>
+      <span class="footer-separator">|</span>
+      <a href="https://github.com/NilayShenai/MGII" target="_blank" rel="noopener noreferrer" class="footer-link">
+        GitHub: NilayShenai/MGII
+      </a>
+    </div>
+  </footer>
+
   <!-- Core State Logic & Tree Data -->
-  <script src="app.js"></script>
+  <script src="app.js?v=5"></script>
 
 </body>
 </html>

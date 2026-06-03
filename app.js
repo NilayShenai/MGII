@@ -107,7 +107,7 @@ const GENDERS = {
   },
   "Gender Variant": {
     category: "Non-Binary (Static)",
-    definition: "A clinical designation for gender expressions or internal identities that show significant developmental variance from major societal baselines.",
+    definition: "A taxonomical designation for gender expressions or internal identities that show significant developmental variance from major societal baselines.",
     colorTheme: "static",
     vector: [45, 45, 25, 25, 25, 15, 60, 20]
   },
@@ -480,93 +480,57 @@ const GENDER_CATEGORIES = {
 
 // === 2. THE 72 QUESTIONS DATABASE ===
 const QUESTIONS = [
-  // --- Scale I: Masculine Internalization (Q1 - Q9) ---
+  // --- Scale I: Masculine Internalization (Q1 - Q5) ---
   { id: "q1", text: "I experience a deep, internal resonance with masculine archetypes and expressions.", scale: "M", weights: { masculinity: 1.5, nullity: -0.5 } },
   { id: "q2", text: "When I visualize my core self in dreams or reflections, that self is masculine.", scale: "M", weights: { masculinity: 1.5, congruence: -0.3 } },
   { id: "q3", text: "I feel a sense of alignment and validation when referred to as a man, male, or using masculine terms.", scale: "M", weights: { masculinity: 1.5 } },
-  { id: "q4", text: "I feel a natural sense of belonging and connection in spaces designated for men.", scale: "M", weights: { masculinity: 1.2 } },
-  { id: "q5", text: "I internalize masculine attributes (e.g., strength, protector roles, masculine styles) as essential to my sense of self.", scale: "M", weights: { masculinity: 1.0 } },
-  { id: "q6", text: "My psychological development has been shaped by a desire to embody masculine traits.", scale: "M", weights: { masculinity: 1.2 } },
-  { id: "q7", text: "I feel an intuitive comfort when my presentation reflects a masculine silhouette or aesthetic.", scale: "M", weights: { masculinity: 1.0 } },
-  { id: "q8", text: "When others describe me as masculine, it feels like an accurate reflection of my true self.", scale: "M", weights: { masculinity: 1.3 } },
-  { id: "q9", text: "I find that masculine energies or qualities form a solid, dominant pillar of my internal identity.", scale: "M", weights: { masculinity: 1.5 } },
+  { id: "q4", text: "I feel an intuitive comfort when my presentation reflects a masculine silhouette or aesthetic.", scale: "M", weights: { masculinity: 1.0 } },
+  { id: "q5", text: "I find that masculine energies or qualities form a solid, dominant pillar of my internal identity.", scale: "M", weights: { masculinity: 1.5 } },
 
-  // --- Scale II: Feminine Internalization (Q10 - Q18) ---
-  { id: "q10", text: "I experience a deep, internal resonance with feminine archetypes and expressions.", scale: "F", weights: { femininity: 1.5, nullity: -0.5 } },
-  { id: "q11", text: "When I visualize my core self in dreams or reflections, that self is feminine.", scale: "F", weights: { femininity: 1.5, congruence: -0.3 } },
-  { id: "q12", text: "I feel a sense of alignment and validation when referred to as a woman, female, or using feminine terms.", scale: "F", weights: { femininity: 1.5 } },
-  { id: "q13", text: "I feel a natural sense of belonging and connection in spaces designated for women.", scale: "F", weights: { femininity: 1.2 } },
-  { id: "q14", text: "I internalize feminine attributes (e.g., nurturing roles, feminine styles, grace) as essential to my sense of self.", scale: "F", weights: { femininity: 1.0 } },
-  { id: "q15", text: "My psychological development has been shaped by a desire to embody feminine traits.", scale: "F", weights: { femininity: 1.2 } },
-  { id: "q16", text: "I feel an intuitive comfort when my presentation reflects a feminine silhouette or aesthetic.", scale: "F", weights: { femininity: 1.0 } },
-  { id: "q17", text: "When others describe me as feminine, it feels like an accurate reflection of my true self.", scale: "F", weights: { femininity: 1.3 } },
-  { id: "q18", text: "I find that feminine energies or qualities form a solid, dominant pillar of my internal identity.", scale: "F", weights: { femininity: 1.5 } },
+  // --- Scale II: Feminine Internalization (Q6 - Q10) ---
+  { id: "q6", text: "I experience a deep, internal resonance with feminine archetypes and expressions.", scale: "F", weights: { femininity: 1.5, nullity: -0.5 } },
+  { id: "q7", text: "When I visualize my core self in dreams or reflections, that self is feminine.", scale: "F", weights: { femininity: 1.5, congruence: -0.3 } },
+  { id: "q8", text: "I feel a sense of alignment and validation when referred to as a woman, female, or using feminine terms.", scale: "F", weights: { femininity: 1.5 } },
+  { id: "q9", text: "I feel an intuitive comfort when my presentation reflects a feminine silhouette or aesthetic.", scale: "F", weights: { femininity: 1.0 } },
+  { id: "q10", text: "I find that feminine energies or qualities form a solid, dominant pillar of my internal identity.", scale: "F", weights: { femininity: 1.5 } },
 
-  // --- Scale III: Agender / Nullity (Q19 - Q27) ---
-  { id: "q19", text: "When I search for my internal gender, I find a quiet, neutral space rather than a masculine or feminine presence.", scale: "N", weights: { nullity: 1.5, masculinity: -0.5, femininity: -0.5 } },
-  { id: "q20", text: "I experience my identity as a featureless void or an empty canvas, devoid of gendered characteristics.", scale: "N", weights: { nullity: 1.8, masculinity: -0.8, femininity: -0.8 } },
-  { id: "q21", text: "I feel completely detached from the concept of gender; it feels like a foreign language I do not speak.", scale: "N", weights: { nullity: 1.5, defiance: 0.5 } },
-  { id: "q22", text: "My internal self feels neutral, like water or clear glass, lacking any color, warmth, or gendered tone.", scale: "N", weights: { nullity: 1.5 } },
-  { id: "q23", text: "I feel most authentic when I am perceived simply as a human being, entirely outside gender categories.", scale: "N", weights: { nullity: 1.5 } },
-  { id: "q24", text: "I feel that gender is a property I do not possess; I am genderless.", scale: "N", weights: { nullity: 1.8, congruence: -0.5 } },
-  { id: "q25", text: "If my internal identity were a canvas, it would be entirely blank and clean, without any lines or shapes.", scale: "N", weights: { nullity: 1.5 } },
-  { id: "q26", text: "I feel an active neutrality, a positive state of being gender-free rather than an empty lack.", scale: "N", weights: { nullity: 1.5 } },
-  { id: "q27", text: "I find the experience of having a gender identity to be abstract, alien, or inapplicable to my sense of self.", scale: "N", weights: { nullity: 1.8, defiance: 0.4 } },
+  // --- Scale III: Agender / Nullity (Q11 - Q15) ---
+  { id: "q11", text: "When I search for my internal gender, I find a quiet, neutral space rather than a masculine or feminine presence.", scale: "N", weights: { nullity: 1.5, masculinity: -0.5, femininity: -0.5 } },
+  { id: "q12", text: "I experience my identity as a featureless void or an empty canvas, devoid of gendered characteristics.", scale: "N", weights: { nullity: 1.8, masculinity: -0.8, femininity: -0.8 } },
+  { id: "q13", text: "I feel completely detached from the concept of gender; it feels like a foreign language I do not speak.", scale: "N", weights: { nullity: 1.5, defiance: 0.5 } },
+  { id: "q14", text: "I feel most authentic when I am perceived simply as a human being, entirely outside gender categories.", scale: "N", weights: { nullity: 1.5 } },
+  { id: "q15", text: "I feel that gender is a property I do not possess; I am genderless.", scale: "N", weights: { nullity: 1.8, congruence: -0.5 } },
 
-  // --- Scale IV: Fluidity (Q28 - Q36) ---
-  { id: "q28", text: "My gender identity is dynamic; it moves, drifts, or shifts over time.", scale: "FL", weights: { fluidity: 1.8, congruence: -0.3 } },
-  { id: "q29", text: "I experience my gender as a fluid stream, changing its flow and characteristics depending on my internal states.", scale: "FL", weights: { fluidity: 1.5, flux: 0.4 } },
-  { id: "q30", text: "I feel like a different gender at different times, moving between masculine, feminine, and neutral spaces.", scale: "FL", weights: { fluidity: 1.8 } },
-  { id: "q31", text: "The way I relate to gender is highly temporal, with noticeable transitions over days, weeks, or months.", scale: "FL", weights: { fluidity: 1.8 } },
-  { id: "q32", text: "I feel comfortable with the idea that my gender is not a fixed destination, but a journey of continuous motion.", scale: "FL", weights: { fluidity: 1.5 } },
-  { id: "q33", text: "I experience periods where my gender feels masculine, followed by periods where it shifts to feminine or neutral.", scale: "FL", weights: { fluidity: 1.8 } },
-  { id: "q34", text: "My internal gender presentation and sense of self are in a state of ongoing, adaptive transition.", scale: "FL", weights: { fluidity: 1.5, flux: 0.5 } },
-  { id: "q35", text: "I find that my gender is highly responsive to external settings, shifting its nature depending on the social environment.", scale: "FL", weights: { fluidity: 1.5, defiance: 0.3 } },
-  { id: "q36", text: "I identify with the concept of gender fluidity as a permanent and stable way of being unstable.", scale: "FL", weights: { fluidity: 1.8 } },
+  // --- Scale IV: Fluidity (Q16 - Q19) ---
+  { id: "q16", text: "My gender identity is dynamic; it moves, drifts, or shifts over time.", scale: "FL", weights: { fluidity: 1.8, congruence: -0.3 } },
+  { id: "q17", text: "I experience my gender as a fluid stream, changing its flow and characteristics depending on my internal states.", scale: "FL", weights: { fluidity: 1.5, flux: 0.4 } },
+  { id: "q18", text: "I feel like a different gender at different times, moving between masculine, feminine, and neutral spaces.", scale: "FL", weights: { fluidity: 1.8 } },
+  { id: "q19", text: "I experience periods where my gender feels masculine, followed by periods where it shifts to feminine or neutral.", scale: "FL", weights: { fluidity: 1.8 } },
 
-  // --- Scale V: Flux (Q37 - Q45) ---
-  { id: "q37", text: "The intensity of my gendered feelings fluctuates, ranging from highly amplified to barely perceptible.", scale: "FX", weights: { flux: 1.8, fluidity: 0.4 } },
-  { id: "q38", text: "Some days I feel my gender very strongly, while on other days it fades to a faint, quiet background whisper.", scale: "FX", weights: { flux: 1.8, nullity: 0.5 } },
-  { id: "q39", text: "The 'volume' of my gender experience is variable, even when the core type of gender remains constant.", scale: "FX", weights: { flux: 1.5 } },
-  { id: "q40", text: "I experience sudden spikes or surges in my gender's intensity, followed by a return to a low-energy baseline.", scale: "FX", weights: { flux: 1.8, fluidity: 0.5 } },
-  { id: "q41", text: "I feel a partial, muted connection to gender, like a radio station that is slightly out of tune or fading in and out.", scale: "FX", weights: { flux: 1.5, nullity: 0.5 } },
-  { id: "q42", text: "My gendered energy operates on a dimmer switch, changing its brightness rather than its color.", scale: "FX", weights: { flux: 1.5 } },
-  { id: "q43", text: "I experience states where my gender is intensely active, contrasted with states where it feels almost agender.", scale: "FX", weights: { flux: 1.8, nullity: 0.5 } },
-  { id: "q44", text: "The strength of my identification with any gender is volatile, rising and falling in waves.", scale: "FX", weights: { flux: 1.5 } },
-  { id: "q45", text: "I experience a sense of gendered presence that is inconsistent, fluctuating in its clarity and power.", scale: "FX", weights: { flux: 1.8 } },
+  // --- Scale V: Flux (Q20 - Q23) ---
+  { id: "q20", text: "The intensity of my gendered feelings fluctuates, ranging from highly amplified to barely perceptible.", scale: "FX", weights: { flux: 1.8, fluidity: 0.4 } },
+  { id: "q21", text: "Some days I feel my gender very strongly, while on other days it fades to a faint, quiet background whisper.", scale: "FX", weights: { flux: 1.8, nullity: 0.5 } },
+  { id: "q22", text: "The 'volume' of my gender experience is variable, even when the core type of gender remains constant.", scale: "FX", weights: { flux: 1.5 } },
+  { id: "q23", text: "I experience states where my gender is intensely active, contrasted with states where it feels almost agender.", scale: "FX", weights: { flux: 1.8, nullity: 0.5 } },
 
-  // --- Scale VI: Xenic Metaphor (Q46 - Q54) ---
-  { id: "q46", text: "I conceptualize my internal identity using metaphors from nature, such as plants, elements, or ecosystems.", scale: "X", weights: { xenic: 1.8 } },
-  { id: "q47", text: "Traditional human gender terms feel too limiting; I relate my gender to cosmic concepts like stars, nebulas, or space.", scale: "X", weights: { xenic: 1.8, nullity: 0.4 } },
-  { id: "q48", text: "I feel a sense of alignment between my gender identity and computational concepts, like computer code, software, or glitches.", scale: "X", weights: { xenic: 1.8, fluidity: 0.3 } },
-  { id: "q49", text: "My internal gender experience feels closely aligned with specific aesthetic styles, textures, or color palettes.", scale: "X", weights: { xenic: 1.5 } },
-  { id: "q50", text: "My experience of gender is deeply intertwined with my neurodivergence (e.g., autism, ADHD), shaping how I perceive identity.", scale: "X", weights: { xenic: 1.5, nullity: 0.4 } },
-  { id: "q51", text: "I relate my gender to abstract concepts or non-human entities rather than traditional masculine or feminine roles.", scale: "X", weights: { xenic: 1.8 } },
-  { id: "q52", text: "I find that art, music, or sensory atmospheres capture my gender far better than any social label.", scale: "X", weights: { xenic: 1.5 } },
-  { id: "q53", text: "My gender feels like a custom landscape composed of elements that are not traditionally associated with gender at all.", scale: "X", weights: { xenic: 1.8 } },
-  { id: "q54", text: "I perceive my gender as an ethereal or spiritual energy rather than a biological or social category.", scale: "X", weights: { xenic: 1.5 } },
+  // --- Scale VI: Xenic Metaphor (Q24 - Q27) ---
+  { id: "q24", text: "I conceptualize my internal identity using metaphors from nature, such as plants, elements, or ecosystems.", scale: "X", weights: { xenic: 1.8 } },
+  { id: "q25", text: "Traditional human gender terms feel too limiting; I relate my gender to cosmic concepts like stars, nebulas, or space.", scale: "X", weights: { xenic: 1.8, nullity: 0.4 } },
+  { id: "q26", text: "I relate my gender to abstract concepts or non-human entities rather than traditional masculine or feminine roles.", scale: "X", weights: { xenic: 1.8 } },
+  { id: "q27", text: "My gender feels like a custom landscape composed of elements that are not traditionally associated with gender at all.", scale: "X", weights: { xenic: 1.8 } },
 
-  // --- Scale VII: Systemic Defiance (Q55 - Q63) ---
-  { id: "q55", text: "I view my gender identity and presentation as an active, conscious disruption of societal norms.", scale: "D", weights: { defiance: 1.8 } },
-  { id: "q56", text: "I feel a profound indifference or apathy toward how society labels my gender; it simply does not matter to me.", scale: "D", weights: { defiance: 1.8, nullity: 0.4 } },
-  { id: "q57", text: "I feel that social gender categories are artificial boundaries, and I actively choose to subvert them.", scale: "D", weights: { defiance: 1.8, congruence: -0.4 } },
-  { id: "q58", text: "My gender is an entirely self-contained system unique to my own consciousness, independent of comparison to others.", scale: "D", weights: { defiance: 1.5, xenic: 0.3 } },
-  { id: "q59", text: "I experience a sense of empowerment in presenting my gender in ways that confuse, challenge, or defy binary expectations.", scale: "D", weights: { defiance: 1.5 } },
-  { id: "q60", text: "I reject the institutional and legal structures that force individuals into rigid gender boxes.", scale: "D", weights: { defiance: 1.8 } },
-  { id: "q61", text: "I treat gender as a playground or performance art, deliberately mixing and matching conflicting signals.", scale: "D", weights: { defiance: 1.7 } },
-  { id: "q62", text: "My identity is defined by a refusal to conform to any established gender expectations, binary or non-binary.", scale: "D", weights: { defiance: 1.8 } },
-  { id: "q63", text: "I feel that trying to fit my internal experience into a social gender label is counterproductive or limiting.", scale: "D", weights: { defiance: 1.8 } },
+  // --- Scale VII: Systemic Defiance (Q28 - Q31) ---
+  { id: "q28", text: "I view my gender identity and presentation as an active, conscious disruption of societal norms.", scale: "D", weights: { defiance: 1.8 } },
+  { id: "q29", text: "I feel a profound indifference or apathy toward how society labels my gender; it simply does not matter to me.", scale: "D", weights: { defiance: 1.8, nullity: 0.4 } },
+  { id: "q30", text: "I feel that social gender categories are artificial boundaries, and I actively choose to subvert them.", scale: "D", weights: { defiance: 1.8, congruence: -0.4 } },
+  { id: "q31", text: "My identity is defined by a refusal to conform to any established gender expectations, binary or non-binary.", scale: "D", weights: { defiance: 1.8 } },
 
-  // --- Scale VIII: Assigned Sex Congruence (Q64 - Q72) ---
-  { id: "q64", text: "I experience a sense of peace, comfort, and natural alignment with the sex I was assigned at birth.", scale: "C", weights: { congruence: 1.8 } },
-  { id: "q65", text: "I experience distress, anxiety, or alienation (dysphoria) when looking at my physical sex characteristics.", scale: "C", weights: { congruence: -1.8 } },
-  { id: "q66", text: "I have taken, or strongly desire to take, medical steps (hormones, surgery) to transition my body to match my identity.", scale: "C", weights: { congruence: -1.8 } },
-  { id: "q67", text: "I feel completely at ease when others address me using the gender roles and terms associated with my birth sex.", scale: "C", weights: { congruence: 1.5 } },
-  { id: "q68", text: "I experience a sense of somatic congruence; my physical body and my internal identity are in harmonious agreement.", scale: "C", weights: { congruence: 1.8 } },
-  { id: "q69", text: "I feel that my birth sex assignment is a central and correct aspect of my overall gender experience.", scale: "C", weights: { congruence: 1.5 } },
-  { id: "q70", text: "I experience a strong desire to be recognized as a gender completely different from the one assigned to me at birth.", scale: "C", weights: { congruence: -1.8 } },
-  { id: "q71", text: "When others refer to me using the pronouns of my birth sex, it feels natural and correct.", scale: "C", weights: { congruence: 1.5 } },
-  { id: "q72", text: "I experience no disconnect between my physical anatomy, my social role, and my internal sense of gender.", scale: "C", weights: { congruence: 1.8 } }
+  // --- Scale VIII: Assigned Sex Congruence (Q32 - Q36) ---
+  { id: "q32", text: "I experience a sense of peace, comfort, and natural alignment with the sex I was assigned at birth.", scale: "C", weights: { congruence: 1.8 } },
+  { id: "q33", text: "I experience distress, anxiety, or alienation (dysphoria) when looking at my physical sex characteristics.", scale: "C", weights: { congruence: -1.8 } },
+  { id: "q34", text: "I have taken, or strongly desire to take, medical steps (hormones, surgery) to transition my body to match my identity.", scale: "C", weights: { congruence: -1.8 } },
+  { id: "q35", text: "I experience a sense of somatic congruence; my physical body and my internal identity are in harmonious agreement.", scale: "C", weights: { congruence: 1.8 } },
+  { id: "q36", text: "I experience no disconnect between my physical anatomy, my social role, and my internal sense of gender.", scale: "C", weights: { congruence: 1.8 } }
 ];
 
 const DIMENSION_KEYS = ["masculinity", "femininity", "nullity", "fluidity", "flux", "xenic", "defiance", "congruence"];
@@ -641,34 +605,50 @@ function computeUserVector() {
   return normalizedVector;
 }
 
-// Salience-Weighted similarity ranking
+// Salience-Weighted similarity ranking with continuous extremity-based weight amplification
 function calculateGenderMatches(userVector) {
-  // Determine salience multipliers based on user vectors to prune incompatible matches
   const salienceWeights = {};
-  DIMENSION_KEYS.forEach(k => salienceWeights[k] = 1.0);
+  
+  DIMENSION_KEYS.forEach(k => {
+    // Base weight is 1.0
+    let w = 1.0;
+    
+    // Extremity boost: weights are amplified if the user score is far from the neutral midpoint (50)
+    // If userVal is 0 or 100, the extremity ratio is 1.0. If userVal is 50, it is 0.0.
+    const userVal = userVector[k];
+    const extremity = Math.abs(userVal - 50) / 50; // 0.0 to 1.0
+    
+    // Standard extremity boost coefficient
+    let boostCoeff = 0.8;
+    
+    // Special dimensions have higher psychological defining power at extremes
+    if (k === "congruence") boostCoeff = 1.5; // Cis vs Trans boundary defining power
+    if (k === "xenic") boostCoeff = 1.2;      // Metaphorical identity defining power
+    if (k === "fluidity") boostCoeff = 1.2;   // Static vs Fluid boundary defining power
+    if (k === "nullity") boostCoeff = 1.0;     // Agender spectrum defining power
+    
+    w += extremity * boostCoeff;
+    salienceWeights[k] = w;
+  });
 
-  // 1. Fluidity Constraint: if user has low fluidity, heavily penalize fluid identities
-  if (userVector.fluidity < 20) {
-    salienceWeights.fluidity = 2.5;
-    salienceWeights.flux = 2.0;
-  }
-  // 2. Xenic Constraint: if user does not identify with xenic, screen out xenogenders
+  // Apply specific hard-cutoff protections (like screening out xenogenders if xenic is very low)
   if (userVector.xenic < 15) {
-    salienceWeights.xenic = 2.2;
+    salienceWeights.xenic = Math.max(salienceWeights.xenic, 2.5);
   }
-  // 3. Congruence Constraint: if user has high birth congruence, prioritize cis profiles
+  if (userVector.fluidity < 20) {
+    salienceWeights.fluidity = Math.max(salienceWeights.fluidity, 2.5);
+    salienceWeights.flux = Math.max(salienceWeights.flux, 2.0);
+  }
   if (userVector.congruence > 80) {
-    salienceWeights.congruence = 2.5;
+    salienceWeights.congruence = Math.max(salienceWeights.congruence, 2.5);
   }
-  // 4. Agender Constraint: if user has very high nullity, prioritize agender spectrums
   if (userVector.nullity > 80) {
-    salienceWeights.nullity = 2.0;
+    salienceWeights.nullity = Math.max(salienceWeights.nullity, 2.2);
   }
-
+  
   // Calculate sum of salience weights for distance normalization
   let salienceSum = 0;
   DIMENSION_KEYS.forEach(k => salienceSum += salienceWeights[k]);
-  const maxPossibleDistance = 100 * Math.sqrt(salienceSum);
 
   const matches = Object.entries(GENDERS).map(([genderName, genderDetails]) => {
     let sumSquaredDiff = 0;
@@ -681,10 +661,9 @@ function calculateGenderMatches(userVector) {
 
     const distance = Math.sqrt(sumSquaredDiff);
     
-    // Scale matching using a tuned discriminative factor
-    // Scale factor makes the matching selective: a distance of ~45 leads to ~65% match
-    const scaleFactor = 120 * Math.sqrt(salienceSum / 8);
-    const matchPercentage = Math.max(0, Math.round(100 * (1 - (distance / scaleFactor))));
+    // Scale matching using a dynamic width parameter (sigma) of the Gaussian distribution
+    const scaleFactor = 100 * Math.sqrt(salienceSum / 8);
+    const matchPercentage = Math.round(100 * Math.exp(-Math.pow(distance / scaleFactor, 2)));
 
     return {
       name: genderName,
@@ -716,7 +695,7 @@ function calculateDiagnosticIndices(userVector) {
 }
 
 // Generate diagnostic narrative report based on indices
-function generateClinicalInterpretation(indices, topGender) {
+function generateInterpretation(indices, topGender) {
   let narrative = "";
 
   // 1. Core Profile Alignment
@@ -742,7 +721,7 @@ function generateClinicalInterpretation(indices, topGender) {
 
   // 4. Metaphorical Framing (Xenic)
   if (indices.xmi >= 65) {
-    narrative += "You demonstrate a strong tendency toward xenic cognitive schemas, conceptualizing identity through ecological, celestial, or digital constructs rather than human social frameworks. This pattern is clinically associated with neurodivergence-entangled gender conceptualizations. ";
+    narrative += "You demonstrate a strong tendency toward xenic cognitive schemas, conceptualizing identity through ecological, celestial, or digital constructs rather than human social frameworks. This pattern is frequently associated with neurodivergence-entangled gender conceptualizations. ";
   }
 
   // 5. Defiance
@@ -850,8 +829,7 @@ function renderWelcome(container) {
     <div id="quiz-card" class="glass-card animate-fade-in text-center">
       <h1 class="hero-title">Multidimensional Gender Identity Inventory</h1>
       <p class="hero-subtitle">
-        A clinical psychometric assessment designed for individuals seeking clarity on their gender coordinates. 
-        By evaluating your internal resonance across 8 independent psychological dimensions, the engine maps your unique experience against a spectrum of 72 taxonomical profiles, providing clear alignment metrics rather than rigid classifications.
+        An assessment for people who are confused as to where they stand on the gender spectrum. By evaluating your internal resonance across 8 independent psychological dimensions, the engine maps your unique experience against a spectrum of 72 taxonomical profiles, helping you find where you stand through clear alignment metrics.
       </p>
       
       <div class="welcome-features font-light">
@@ -862,7 +840,7 @@ function renderWelcome(container) {
           <div class="feature-text"><strong>Salience similarity matching:</strong> Uses dynamically weighted matrix operations to score matches against 72 verified taxonomy labels.</div>
         </div>
         <div class="feature-item" style="border-left: 2px solid hsl(var(--color-null)); padding-left: 0.75rem; text-align: left;">
-          <div class="feature-text"><strong>72 Clinically Curated Items:</strong> Structured statement scales to measure somatic congruence and temporal fluidity with high resolution.</div>
+          <div class="feature-text"><strong>36 Curated Items:</strong> Structured statement scales to measure somatic congruence and temporal fluidity with high resolution.</div>
         </div>
       </div>
 
@@ -957,7 +935,7 @@ function renderResult(container) {
   const runnerUps = sortedMatches.slice(1, 4);
 
   const indices = calculateDiagnosticIndices(userVector);
-  const narrative = generateClinicalInterpretation(indices, primaryMatch);
+  const narrative = generateInterpretation(indices, primaryMatch);
 
   // Generate vector bars listing
   const vectorBarsHTML = DIMENSION_KEYS.map(k => {
@@ -991,7 +969,7 @@ function renderResult(container) {
 
   container.innerHTML = `
     <div id="quiz-card" class="glass-card result-card theme-${themeClass} animate-fade-in text-center" style="max-width: 820px; margin: 0 auto;">
-      <div class="brand-badge">Clinical Profile Discovered</div>
+      <div class="brand-badge">Profile Discovered</div>
       
       <div class="result-header">
         <h1 class="result-name glow-${themeClass}">${primaryMatch.name}</h1>
@@ -1017,7 +995,7 @@ function renderResult(container) {
         </div>
       </div>
 
-      <!-- Section: Clinical Narrative Interpretation -->
+      <!-- Section: Narrative Interpretation -->
       <div class="result-body">
         <div class="definition-container">
           <h3>Psychological Construct Assessment</h3>
@@ -1054,7 +1032,7 @@ function renderResult(container) {
 
       <!-- Section: Dynamic Indices & Dual-Energy Balance -->
       <div class="my-6">
-        <h3 class="font-bold text-sm text-gray-400 uppercase tracking-widest text-left pb-1 mb-4" style="border-bottom: 1px solid var(--border-card);">Clinical Diagnostic Indicators</h3>
+        <h3 class="font-bold text-sm text-gray-400 uppercase tracking-widest text-left pb-1 mb-4" style="border-bottom: 1px solid var(--border-card);">Psychometric Alignment Indicators</h3>
         
         <!-- Dual-Energy Balance -->
         <div class="deb-scale-container">
@@ -1318,7 +1296,7 @@ function buildTaxonomyHierarchy() {
     id: "root",
     name: "Taxonomy Root",
     category: "System Core",
-    text: "The clinical spectrum of 72 human gender identities and experiences.",
+    text: "The psychometric spectrum of 72 human gender identities and experiences.",
     type: "decision",
     children: []
   };
@@ -1568,7 +1546,10 @@ function initializeD3Tree() {
   window.d3UpdateTree = updateTree;
 
   // Zoom center translation offset
-  svg.call(zoom.transform, d3.zoomIdentity.translate(40, height / 2 - 10).scale(0.8));
+  const isMobile = window.innerWidth < 768;
+  const initialScale = isMobile ? 0.55 : 0.8;
+  const initialTranslateX = isMobile ? 15 : 40;
+  svg.call(zoom.transform, d3.zoomIdentity.translate(initialTranslateX, height / 2 - 10).scale(initialScale));
 }
 
 function onNodeClick(node) {
@@ -1579,6 +1560,11 @@ function onNodeClick(node) {
 
   emptyState.classList.add("hidden");
   activeState.classList.remove("hidden");
+
+  const panel = document.getElementById("chart-detail-panel");
+  if (panel) {
+    panel.classList.add("drawer-open");
+  }
 
   const categoryPill = document.getElementById("panel-category-pill");
   const nodeType = document.getElementById("panel-node-type");
@@ -1677,9 +1663,12 @@ function resetChartZoom() {
   if (!svg || !zoom || !canvas) return;
 
   const height = canvas.clientHeight || 600;
+  const isMobile = window.innerWidth < 768;
+  const initialScale = isMobile ? 0.55 : 0.8;
+  const initialTranslateX = isMobile ? 15 : 40;
 
   svg.transition().duration(750)
-    .call(zoom.transform, d3.zoomIdentity.translate(40, height / 2 - 10).scale(0.8));
+    .call(zoom.transform, d3.zoomIdentity.translate(initialTranslateX, height / 2 - 10).scale(initialScale));
 }
 
 function collapseAllNodes() {
@@ -1777,7 +1766,8 @@ function centerZoomOnNode(d) {
   const width = canvas.clientWidth || 800;
   const height = canvas.clientHeight || 600;
 
-  const scale = 1.0;
+  const isMobile = window.innerWidth < 768;
+  const scale = isMobile ? 0.75 : 1.0;
   const tx = width / 2 - scale * d.y;
   const ty = height / 2 - scale * d.x;
 
@@ -1786,6 +1776,18 @@ function centerZoomOnNode(d) {
 }
 
 // Global Binds for DOM Event calls
+function closeDetailPanel() {
+  const emptyState = document.getElementById("panel-empty-state");
+  const activeState = document.getElementById("panel-active-state");
+  const panel = document.getElementById("chart-detail-panel");
+  if (emptyState && activeState && panel) {
+    activeState.classList.add("hidden");
+    emptyState.classList.remove("hidden");
+    panel.classList.remove("drawer-open");
+    clearSvgPathHighlight();
+  }
+}
+
 window.startQuiz = startQuiz;
 window.selectLikert = selectLikert;
 window.goBack = goBack;
@@ -1796,6 +1798,7 @@ window.collapseAllNodes = collapseAllNodes;
 window.expandAllNodes = expandAllNodes;
 window.handleSearch = handleSearch;
 window.resetToHome = resetToHome;
+window.closeDetailPanel = closeDetailPanel;
 
 function resetToHome() {
   QuizState.quizStatus = "welcome";

@@ -84,6 +84,15 @@ body {
   text-align: left;
 }
 
+@media (max-width: 480px) {
+  .glass-card, .flat-card {
+    padding: 1.25rem 1rem;
+  }
+  .hero-title {
+    font-size: 1.4rem;
+  }
+}
+
 /* Welcome Page Specifics */
 .brand-badge {
   display: inline-block;
@@ -214,6 +223,13 @@ body {
   margin-bottom: 2rem;
 }
 
+@media (max-width: 480px) {
+  .question-text {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
 /* Flat 5-Point Likert Grid */
 .likert-container {
   display: grid;
@@ -340,6 +356,12 @@ body {
   color: var(--text-primary);
   text-shadow: none; /* No shadows */
   line-height: 1.2;
+}
+
+@media (max-width: 480px) {
+  .result-name {
+    font-size: 1.6rem;
+  }
 }
 
 .result-name.glow-null { color: hsl(var(--color-null)); }
@@ -674,6 +696,14 @@ header {
   justify-content: center;
 }
 
+@media (max-width: 600px) {
+  .switcher-controls {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.1rem;
+  }
+}
+
 @media (max-width: 480px) {
   .switcher-btn {
     padding: 0.35rem 0.6rem;
@@ -692,6 +722,28 @@ header {
   cursor: pointer;
   background: transparent;
   text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .switcher-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+    font-size: 0.7rem;
+  }
+  .switcher-btn.active {
+    color: var(--text-primary) !important;
+    background-color: transparent !important;
+    border: 1px solid var(--border-high) !important;
+  }
+  .switcher-btn.active::before {
+    content: "[ ";
+    color: hsl(var(--color-dynamic));
+  }
+  .switcher-btn.active::after {
+    content: " ]";
+    color: hsl(var(--color-dynamic));
+  }
 }
 
 .switcher-btn.active {
@@ -739,6 +791,12 @@ header {
   flex-direction: column;
 }
 
+@media (max-width: 1023px) {
+  .chart-canvas-container {
+    min-height: 450px;
+  }
+}
+
 .chart-toolbar {
   position: absolute;
   top: 0.75rem;
@@ -747,6 +805,19 @@ header {
   flex-wrap: wrap;
   gap: 0.35rem;
   z-index: 20;
+}
+
+@media (max-width: 1023px) {
+  .chart-toolbar {
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0.75rem;
+    background: var(--bg-darkest);
+    border-bottom: 1px solid var(--border-card);
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 .toolbar-btn {
@@ -779,6 +850,12 @@ header {
   cursor: grabbing;
 }
 
+@media (max-width: 1023px) {
+  .canvas-area {
+    min-height: 450px;
+  }
+}
+
 #chart-detail-panel {
   width: 100%;
   background: var(--bg-card);
@@ -788,12 +865,52 @@ header {
   flex-direction: column;
   gap: 1.25rem;
   text-align: left;
-  transition: all 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease;
 }
 
 @media (min-width: 1024px) {
   #chart-detail-panel {
     width: 22rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  #chart-detail-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    max-height: 65%;
+    background: var(--bg-darkest);
+    border-top: 2px solid var(--border-high);
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    z-index: 1000;
+    transform: translateY(100%);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+    padding: 1.25rem;
+    box-sizing: border-box;
+  }
+  
+  #chart-detail-panel.drawer-open {
+    transform: translateY(0);
+  }
+  
+  .panel-empty {
+    display: none !important;
+  }
+}
+
+#close-panel-btn {
+  display: none !important;
+}
+
+@media (max-width: 1023px) {
+  #close-panel-btn {
+    display: inline-block !important;
   }
 }
 
@@ -1083,14 +1200,61 @@ header {
 }
 
 .math-block {
-  margin: 1.75rem 0;
+  margin: 1.25rem 0;
   padding: 0.5rem 0;
   text-align: center;
   background: transparent;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: var(--text-primary);
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 480px) {
+  .math-block {
+    font-size: 0.9rem;
+    margin: 0.85rem 0;
+  }
+}
+
+/* Custom KaTeX Sizing and Responsive Adjustments */
+.katex-display {
+  font-size: 0.95em !important;
+  margin: 0.85rem 0 !important;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.katex {
+  font-size: 1.0em !important;
+}
+
+@media (max-width: 768px) {
+  .katex-display {
+    font-size: 0.9em !important;
+  }
+  .katex {
+    font-size: 0.95em !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .katex-display {
+    font-size: 0.85em !important;
+  }
+  .katex {
+    font-size: 0.9em !important;
+  }
+}
+
+#math-sources-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .source-item {
@@ -1127,6 +1291,61 @@ header {
   font-size: 0.8rem;
   line-height: 1.6;
   color: var(--text-secondary);
+}
+
+/* Footer Styles */
+.site-footer {
+  width: 100%;
+  max-width: 1024px;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-card);
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.footer-separator {
+  color: var(--border-card);
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.footer-link:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+}
+
+@media (max-width: 480px) {
+  .site-footer {
+    margin-top: 2.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .footer-content {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .footer-separator {
+    display: none;
+  }
 }
 
 
