@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Optimization Best Practices -->
+  <title>Gender Spectrum Compass (GSC)</title>
+  <meta name="description" content="An assessment for people who are confused as to where they stand on the gender spectrum. By evaluating your internal resonance across 8 independent psychological dimensions, this tool maps your coordinates against 72 distinct taxonomical profiles.">
+  <meta name="keywords" content="gender spectrum, gender compass, gender identity, gender psychology, psychometric gender test, non-binary, genderfluid, agender, gender care standards">
+  <meta name="author" content="Antigravity Coding System">
+  
+  <!-- Open Graph Social Metadata -->
+  <meta property="og:title" content="Gender Spectrum Compass (GSC)">
+  <meta property="og:description" content="An assessment for people who are confused as to where they stand on the gender spectrum. Map your coordinates against 72 distinct taxonomical profiles.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- KaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, { delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ], throwOnError: false });"></script>
+  
+  <!-- Favicon placeholder (inline svg for zero dependencies) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23b8c5f2%22/></svg>">
+</head>
+<body>
+
+  <!-- Mode Switcher Navigation Header -->
+  <header>
+    <div class="header-logo-container">
+      <span class="logo-title" onclick="resetToHome()" style="cursor: pointer;">SPECTRUM COMPASS</span>
+    </div>
+    
+    <!-- Segmented Switcher Controls -->
+    <div class="switcher-controls">
+      <button id="toggle-quiz-mode" onclick="setViewMode('quiz')" class="switcher-btn active">
+        Take the Inventory
+      </button>
+      <button id="toggle-chart-mode" onclick="setViewMode('chart')" class="switcher-btn inactive">
+        Explore the Taxonomy
+      </button>
+      <button id="toggle-math-mode" onclick="setViewMode('math')" class="switcher-btn inactive">
+        Methodology & Sources
+      </button>
+    </div>
+  </header>
+
+  <!-- Container for Take the Quiz View -->
+  <main class="quiz-shell" id="quiz-shell-wrapper">
+    <div id="app-container">
+      <!-- Dynamic SPA content will inject here from app.js based on QuizState.quizStatus -->
+      <noscript>
+        <div class="flat-card text-center">
+          <h1 class="hero-title">JavaScript Required</h1>
+          <p class="hero-subtitle">
+            This psychometric inventory relies on client-side matrix computations and vector alignment.
+            Please enable JavaScript in your browser parameters to proceed.
+          </p>
+        </div>
+      </noscript>
+    </div>
+  </main>
+
+  <!-- Fullscreen Interactive D3 Chart View -->
+  <div id="explore-chart-container" class="hidden">
+    
+    <!-- Chart Canvas Container -->
+    <div class="chart-canvas-container">
+      
+      <!-- Chart Toolbar overlay -->
+      <div class="chart-toolbar">
+        <button onclick="resetChartZoom()" class="toolbar-btn">
+          Reset Zoom
+        </button>
+        <button onclick="collapseAllNodes()" class="toolbar-btn">
+          Collapse Categories
+        </button>
+        <button onclick="expandAllNodes()" class="toolbar-btn">
+          Expand All
+        </button>
+        <input type="text" id="taxonomy-search" oninput="handleSearch(this.value)" placeholder="Search genders..." class="toolbar-search" />
+      </div>
+      
+      <!-- Interactive D3 SVG Canvas Area -->
+      <div id="chart-canvas" class="canvas-area"></div>
+    </div>
+
+    <!-- Sidebar Detail Panel Drawer -->
+    <aside id="chart-detail-panel">
+      <div id="panel-empty-state" class="panel-empty">
+        <h4 class="font-bold text-gray-400">Clinical Taxonomy Explorer</h4>
+        <p class="panel-info-text">
+          Select any category to expand it, or click a specific gender capsule to inspect its full profile description, clinical coordinates, and 8-dimensional vector footprint.
+        </p>
+      </div>
+      <div id="panel-active-state" class="panel-active hidden">
+        <div class="panel-header-row">
+          <span id="panel-category-pill"></span>
+          <span id="panel-node-type"></span>
+        </div>
+        
+        <div class="panel-title-container">
+          <h2 id="panel-node-title" class="panel-title"></h2>
+          <span id="panel-node-id" class="panel-mono-id"></span>
+        </div>
+
+        <div class="panel-desc-container">
+          <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-white/5 pb-1">Clinical Description</h4>
+          <p id="panel-node-desc" class="text-sm text-gray-300 leading-relaxed font-light"></p>
+        </div>
+
+        <div id="panel-vector-section" class="panel-vector-section hidden">
+          <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-white/5 pb-1">Vector Profile</h4>
+          <div id="panel-vector-bars" class="panel-bar-grid">
+            <!-- Dynamically populated centroid values -->
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Methodology and Sources View Container -->
+  <div id="math-sources-container" class="hidden">
+    <main class="quiz-shell" style="max-width: 820px; margin: 0 auto 2rem auto;">
+      <div class="glass-card">
+        <h2 class="hero-title" style="border-bottom: 1px solid var(--border-card); padding-bottom: 0.5rem; margin-bottom: 2.5rem;">Inventory Methodology</h2>
+        
+        <section class="specs-section">
+          <h3>1. Dimensional Score Computation</h3>
+          <p>
+            The psychometric inventory evaluates participants along 8 independent, continuous psychological dimensions. For each dimension $D_k$ (where $k$ represents the dimension index), the raw score is calculated as a weighted sum of responses:
+          </p>
+          <div class="math-block">
+            $$D_{\text{raw}}(k) = \sum_{i} \left( \text{Weight}_{k, i} \times \text{Answer}_i \right)$$
+          </div>
+          <p>
+            Where response inputs are mapped on a 5-point Likert scale: Strongly Disagree ($-1.0$), Disagree ($-0.5$), Neutral ($0.0$), Agree ($0.5$), and Strongly Agree ($1.0$).
+          </p>
+        </section>
+
+        <section class="specs-section">
+          <h3>2. Dynamic Bounds Calibration</h3>
+          <p>
+            To ensure exactly normalized output scales between 0% and 100%, the engine executes a dynamic bounds evaluation during initialization. It computes the theoretical maximum and minimum raw scores possible for each axis based on matching weights:
+          </p>
+          <div class="math-block">
+            $$D_{\text{norm}}(k) = 100 \times \frac{D_{\text{raw}}(k) - \text{RawMin}_k}{\text{RawMax}_k - \text{RawMin}_k}$$
+          </div>
+        </section>
+
+        <section class="specs-section">
+          <h3>3. Salience-Weighted Vector Similarity</h3>
+          <p>
+            To match personal coordinates against the 72 centroid profiles, the engine calculates the weighted Euclidean distance across the 8-dimensional space. An adaptive Salience Weight vector $S$ is calculated dynamically to amplify structural dimensions:
+          </p>
+          <div class="math-block">
+            $$\text{Distance}(U, G_j) = \sqrt{\sum_{k} S_k \times \left(U_{\text{norm}}(k) - \text{Centroid}_{j, k}\right)^2}$$
+          </div>
+          <p>
+            The final match percentage is computed using a dynamically adjusted scaling factor $S_{\text{scale}}$ to normalize distances across variable salience bounds:
+          </p>
+          <div class="math-block">
+            $$\text{Match \%} = \max\left(0, 100 \times \left(1 - \frac{\text{Distance}(U, G_j)}{S_{\text{scale}}}\right)\right)$$
+          </div>
+          <p>
+            Where the scaling threshold $S_{\text{scale}}$ dynamically calibrates based on active salience weights:
+          </p>
+          <div class="math-block">
+            $$S_{\text{scale}} = 120 \times \sqrt{\frac{\sum_{k} S_k}{8}}$$
+          </div>
+        </section>
+
+        <h2 class="hero-title" style="border-bottom: 1px solid var(--border-card); padding-bottom: 0.5rem; margin-bottom: 2rem; margin-top: 3rem;">Clinical Sources & Foundations</h2>
+
+        <div class="source-item">
+          <h4 class="source-title">Foundational Multidimensional Models <span class="source-meta">(BSRI / GIS)</span></h4>
+          <p class="source-description">
+            Separation of masculine and feminine internalization into separate orthogonal scales is based on the <strong>Bem Sex-Role Inventory (BSRI)</strong> (Bem, S. L., 1974, <em>Journal of Consulting and Clinical Psychology</em>) and the <strong>Gender Identity Scale (GIS)</strong> (Kagan, J., 1964). These clinical models proved that masculine and feminine attributes exist independently rather than as opposite endpoints of a single bipolar spectrum.
+          </p>
+        </div>
+
+        <div class="source-item">
+          <h4 class="source-title">Non-Binary & Multi-Axis Diagnostics <span class="source-meta">(Tate / Joel)</span></h4>
+          <p class="source-description">
+            Research validating multi-dimensional modeling for non-binary gender identities is drawn from Tate, C. C., et al. (2014, <em>Journal of Sex Research</em>, "Better Psychology for Sexual and Gender Diversities") and Joel, D., et al. (2015, <em>PNAS</em>, "Sex Beyond the Binary: A Mosaic of Brain, Mind, and Gender"). These papers establish that individuals exhibit unique, multi-axial mosaic configurations rather than simple linear classifications.
+          </p>
+        </div>
+
+        <div class="source-item">
+          <h4 class="source-title">Somatic Congruence & Gender Care Standards <span class="source-meta">(WPATH SOC-8)</span></h4>
+          <p class="source-description">
+            The constructs behind Somatic Assigned Sex Congruence (GCI) and somatic distress (dysphoria indices) align with clinical metrics established in the <strong>Standards of Care for the Health of Transgender and Gender Diverse People, Version 8 (SOC-8)</strong> published by the World Professional Association for Transgender Health (WPATH, 2022).
+          </p>
+        </div>
+
+        <div class="source-item">
+          <h4 class="source-title">Temporal Dynamism & Fluidity Profiles <span class="source-meta">(Diamond / Twist)</span></h4>
+          <p class="source-description">
+            Theoretical work on temporal gender fluidity and intensity flux models follows Diamond, L. M. (2008, <em>Female Sexual Fluidity</em>, Harvard University Press) and Twist, J., & de Graaf, N. M. (2019, <em>Clinical Child Psychology and Psychiatry</em>, "Gender Diversity and Gender Dysphoria in Children and Adolescents"). These clinical papers outline criteria for temporal shifting, volatility scales, and partial gender configurations.
+          </p>
+        </div>
+
+        <div class="source-item">
+          <h4 class="source-title">Neurodiversity & Xenic Conceptualization <span class="source-meta">(Strang / Dewinter)</span></h4>
+          <p class="source-description">
+            The intersection of autism/neurodivergent profiles with metaphorical gender experiences (Xenic Metaphors) is documented in Strang, J. F., et al. (2014, <em>Archives of Sexual Behavior</em>, "Increased Gender Variance in Autism Spectrum Disorders") and Dewinter, J., et al. (2017, <em>Journal of Autism and Developmental Disorders</em>). These studies show a significant statistical overlap between atypical sensory conceptualizations and unique gender metaphors.
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Core State Logic & Tree Data -->
+  <script src="app.js"></script>
+
+</body>
+</html>
