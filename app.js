@@ -848,7 +848,7 @@ function renderState() {
 function renderWelcome(container) {
   container.innerHTML = `
     <div id="quiz-card" class="glass-card animate-fade-in text-center">
-      <h1 class="hero-title">Gender Spectrum Compass</h1>
+      <h1 class="hero-title">Multidimensional Gender Identity Inventory</h1>
       <p class="hero-subtitle">
         A clinical psychometric assessment designed for individuals seeking clarity on their gender coordinates. 
         By evaluating your internal resonance across 8 independent psychological dimensions, the engine maps your unique experience against a spectrum of 72 taxonomical profiles, providing clear alignment metrics rather than rigid classifications.
